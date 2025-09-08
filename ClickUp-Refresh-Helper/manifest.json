@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "ClickUp Refresh Helper",
+  "version": "1.0",
+  "description": "ClickUp cache problemlerini çözen otomatik refresh eklentisi",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "browsingData"
+  ],
+  "host_permissions": [
+    "*://*.clickup.com/*",
+    "*://app.clickup.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.clickup.com/*",
+        "*://app.clickup.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ClickUp Refresh Helper"
+  }
+}

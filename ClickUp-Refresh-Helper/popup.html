@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 300px;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      margin: 0;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .header h1 {
+      margin: 0 0 8px 0;
+      font-size: 18px;
+      color: #333;
+    }
+    
+    .header p {
+      margin: 0;
+      color: #666;
+      font-size: 12px;
+    }
+    
+    .control-group {
+      margin-bottom: 16px;
+    }
+    
+    .control-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: #ff8c00;
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    select, input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .button {
+      width: 100%;
+      padding: 10px;
+      background: #ff8c00;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    
+    .button:hover {
+      background: #ff7700;
+    }
+    
+    .button.secondary {
+      background: #6c757d;
+    }
+    
+    .button.secondary:hover {
+      background: #545b62;
+    }
+    
+    .status {
+      text-align: center;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .status.active {
+      background: #fff3cd;
+      color: #856404;
+    }
+    
+    .status.inactive {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    .interval-display {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>ClickUp Refresh Helper</h1>
+    <p>Cache problemlerini çözen akıllı yenileme</p>
+  </div>
+  
+  <div id="status" class="status">
+    Yükleniyor...
+  </div>
+  
+  <div class="control-group">
+    <label>
+      <span>Otomatik Yenileme</span>
+      <div style="margin-top: 8px;">
+        <label class="toggle-switch">
+          <input type="checkbox" id="enabled">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </label>
+  </div>
+  
+  <div class="control-group">
+    <label for="refreshInterval">Yenileme Aralığı</label>
+    <select id="refreshInterval">
+      <option value="120000">2 dakika</option>
+      <option value="300000">5 dakika</option>
+      <option value="600000">10 dakika</option>
+      <option value="900000">15 dakika</option>
+      <option value="1800000">30 dakika</option>
+    </select>
+    <div class="interval-display" id="intervalDisplay"></div>
+  </div>
+  
+  <div class="control-group">
+    <label>
+      <span>Akıllı Yenileme</span>
+      <div style="margin-top: 8px;">
+        <label class="toggle-switch">
+          <input type="checkbox" id="smartRefresh">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </label>
+    <div style="font-size: 11px; color: #666; margin-top: 4px;">
+      Kullanıcı aktifken yenileme yapmaz
+    </div>
+  </div>
+  
+  <button id="manualRefresh" class="button">
+    Şimdi Yenile
+  </button>
+  
+  <button id="clearCache" class="button secondary">
+    Cache Temizle
+  </button>
+  
+  <div style="text-align: center; margin-top: 16px; font-size: 11px; color: #999;">
+    Son yenileme: <span id="lastRefresh">-</span><br>
+    <span style="margin-top: 4px; display: inline-block;">created by Oğuz</span>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
